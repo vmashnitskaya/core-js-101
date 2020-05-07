@@ -293,8 +293,24 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const ccnString = ccn.toString();
+  let sum = 0;
+
+  for (let i = 0; i < ccnString.length; i += 1) {
+    let cardNum = Number(ccnString.charAt(i));
+
+    if ((ccnString.length - i) % 2 === 0) {
+      cardNum *= 2;
+
+      if (cardNum > 9) {
+        cardNum -= 9;
+      }
+    }
+
+    sum += cardNum;
+  }
+  return sum % 10 === 0;
 }
 
 /**
@@ -466,8 +482,26 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  for (let x = 0; x < 3; x += 1) {
+    if (position[x][0] === position[x][1] && position[x][1] === position[x][2]
+      && position[x][0] !== undefined) {
+      return position[x][0];
+    }
+    if (position[0][x] === position[1][x] && position[1][x] === position[2][x]
+      && position[0][x] !== undefined) {
+      return position[0][x];
+    }
+  }
+  if (position[0][0] === position[1][1] && position[1][1] === position[2][2]
+    && position[0][0] !== undefined) {
+    return position[0][0];
+  }
+  if (position[0][2] === position[1][1] && position[1][1] === position[2][0]
+    && position[0][2] !== undefined) {
+    return position[0][2];
+  }
+  return undefined;
 }
 
 
